@@ -6,7 +6,7 @@ const {
   computeSummary,
   calculateBadge,
   checkAndAssignBadges,
-  listActivitiesByStudent,
+  getStudentRegistrations,
   generateStudentReport,
 } = require('../data');
 
@@ -79,7 +79,7 @@ router.post('/:id/change-password', async (req, res) => {
   }
 });
 
-// Öğrencinin faaliyetlerini getir (profil sayfası için)
+// Öğrencinin etkinlik katılımlarını getir
 router.get('/:id/activities', async (req, res) => {
   try {
     const student = await getStudentById(req.params.id);
@@ -87,8 +87,8 @@ router.get('/:id/activities', async (req, res) => {
       return res.status(404).json({ error: 'Öğrenci bulunamadı' });
     }
 
-    const activities = await listActivitiesByStudent(req.params.id);
-    res.json(activities);
+    const registrations = await getStudentRegistrations(req.params.id);
+    res.json(registrations);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -104,7 +104,7 @@ router.get('/:id/badges', async (req, res) => {
   }
 });
 
-// Üniversite başvurusu için rapor indir
+// Üniversite başvurusu için rapor
 router.get('/:id/report', async (req, res) => {
   try {
     const report = await generateStudentReport(req.params.id);

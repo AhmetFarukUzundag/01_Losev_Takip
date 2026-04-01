@@ -18,19 +18,25 @@ router.post('/login', async (req, res) => {
     try {
         if (role === 'student') {
             const student = await loginStudent(email, password);
-            if (student) {
-                return res.json({ user: student, role: 'student' });
+            if (!student) {
+                return res.status(401).json({ error: 'E-posta veya şifre hatalı.' });
             }
+            if (student.pendingApproval) {
+                return res.status(403).json({ error: 'Hesabınız henüz onaylanmamıştır. Lütfen öğretmeniniz veya yöneticiniz ile iletişime geçin.' });
+            }
+            return res.json({ user: student, role: 'student' });
         } else if (role === 'teacher') {
             const teacher = await loginTeacher(email, password);
-            if (teacher) {
-                return res.json({ user: teacher, role: 'teacher' });
+            if (!teacher) {
+                return res.status(401).json({ error: 'E-posta veya şifre hatalı.' });
             }
+            if (teacher.pendingApproval) {
+                return res.status(403).json({ error: 'Hesabınız henüz yönetici tarafından onaylanmamıştır. Lütfen genel merkez ile iletişime geçin.' });
+            }
+            return res.json({ user: teacher, role: 'teacher' });
         } else {
             return res.status(400).json({ error: 'Geçersiz role.' });
         }
-
-        return res.status(401).json({ error: 'E-posta veya şifre hatalı.' });
     } catch (error) {
         console.error('Login error:', error);
         return res.status(500).json({ error: 'Sunucu hatası.' });
@@ -49,14 +55,26 @@ router.post('/register', async (req, res) => {
             if (!payload.firstName || !payload.lastName || !payload.schoolName) {
                 return res.status(400).json({ error: 'Öğrenci için firstName, lastName ve schoolName zorunludur.' });
             }
-            const student = await createStudent(payload);
-            return res.status(201).json({ user: student, role: 'student' });
+            // Öğrenci kayıtları onay bekler (approved = 0)
+            const student = await createStudent({ ...payload, approved: 0 });
+            return res.status(201).json({
+                user: student,
+                role: 'student',
+                pendingApproval: true,
+                message: 'Kaydınız alındı. Hesabınız öğretmen veya yönetici onayından sonra aktifleşecektir.'
+            });
         } else if (role === 'teacher') {
             if (!payload.firstName || !payload.lastName) {
                 return res.status(400).json({ error: 'Öğretmen için firstName ve lastName zorunludur.' });
             }
-            const teacher = await createTeacher(payload);
-            return res.status(201).json({ user: teacher, role: 'teacher' });
+            // Öğretmen kayıtları YALNIZCA admin onayı bekler (approved = 0)
+            const teacher = await createTeacher({ ...payload, approved: 0 });
+            return res.status(201).json({
+                user: teacher,
+                role: 'teacher',
+                pendingApproval: true,
+                message: 'Kaydınız alındı. Hesabınız yönetici onayından sonra aktifleşecektir.'
+            });
         } else {
             return res.status(400).json({ error: 'Geçersiz role.' });
         }
