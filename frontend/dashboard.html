@@ -5,45 +5,21 @@
     <meta charset="UTF-8" />
     <title>LÖSEV İnci - Kontrol Paneli</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        losev: {
-                            red: '#d62828',
-                            redSoft: '#fcd5ce',
-                            redDark: '#9e0000',
-                            green: '#2e7d32',
-                            greenSoft: '#e8f5e9',
-                            orange: '#f77f00',
-                            orangeSoft: '#ffecd1',
-                            blue: '#457b9d',
-                            blueSoft: '#e0fbfc'
-                        }
+                        losev: { red: '#d62828', redSoft: '#fcd5ce', redDark: '#9e0000', green: '#2e7d32', greenSoft: '#e8f5e9', orange: '#f77f00', orangeSoft: '#ffecd1', blue: '#457b9d', blueSoft: '#e0fbfc' }
                     },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    animation: { 'fade-in': 'fadeIn 0.5s ease-out forwards' },
+                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
                 },
             },
         };
@@ -203,10 +179,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-secondary:active {
-            transform: scale(0.95);
-        }
-
         .nav-item {
             display: flex;
             align-items: center;
@@ -245,18 +217,15 @@
 </head>
 
 <body class="bg-slate-50 text-slate-800 antialiased h-screen flex overflow-hidden">
-
-    <!-- Security Check -->
     <script>
         const userJson = localStorage.getItem('auth_user');
         if (!userJson) window.location.href = 'login.html';
         const user = JSON.parse(userJson);
     </script>
 
-    <!-- Sidebar (Desktop) -->
+    <!-- Sidebar -->
     <aside
         class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col h-full shrink-0 shadow-2xl relative z-20 hidden md:flex">
-        <!-- Logo -->
         <div class="px-8 py-8 flex items-center gap-3 cursor-pointer" onclick="switchSection('dashboard')">
             <div
                 class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-losev-red to-rose-600 shadow-lg">
@@ -273,8 +242,6 @@
                 <p class="text-[0.65rem] font-bold text-slate-500 uppercase tracking-wider">İstasyon</p>
             </div>
         </div>
-
-        <!-- User Profile snippet -->
         <div class="px-8 pb-6 border-b border-white/5 flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-lg font-black text-white"
                 id="sbInitials">A</div>
@@ -284,13 +251,7 @@
                     class="text-xs text-losev-orangeSoft font-semibold uppercase tracking-wider truncate">Rol</p>
             </div>
         </div>
-
-        <!-- Navigation -->
-        <nav class="flex-1 px-4 py-8 space-y-2 overflow-y-auto" id="sidebarNav">
-            <!-- Populated via JS -->
-        </nav>
-
-        <!-- Logout Area -->
+        <nav class="flex-1 px-4 py-8 space-y-2 overflow-y-auto" id="sidebarNav"></nav>
         <div class="p-6 border-t border-white/5">
             <button onclick="logout()"
                 class="flex items-center gap-3 px-4 py-3 rounded-xl w-full text-left text-sm font-bold text-slate-400 hover:text-losev-red hover:bg-white/5 transition-colors">
@@ -304,10 +265,7 @@
         </div>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col h-full relative bg-slate-50/50 overflow-hidden">
-
-        <!-- Mobile Header -->
         <header class="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-200">
             <div class="flex items-center gap-2">
                 <div class="h-8 w-8 rounded-lg bg-losev-red text-white flex items-center justify-center">
@@ -322,19 +280,13 @@
             <button onclick="logout()"
                 class="text-slate-500 font-bold text-xs bg-slate-100 px-3 py-1.5 rounded-lg">Çıkış</button>
         </header>
+        <div class="md:hidden bg-white border-b border-slate-200 p-2 flex gap-2 overflow-x-auto" id="mobileNav"></div>
 
-        <!-- Mobile Nav Tabs -->
-        <div class="md:hidden bg-white border-b border-slate-200 p-2 flex gap-2 overflow-x-auto" id="mobileNav">
-            <!-- Populated via JS -->
-        </div>
-
-        <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto w-full">
             <div class="p-6 md:p-10 w-full max-w-6xl mx-auto pb-20">
 
-                <!-- MAIN DASHBOARD VIEW (Student or Teacher overview) -->
+                <!-- DASHBOARD VIEW -->
                 <section id="viewDashboard" class="animate-fade-in hidden-panel space-y-8">
-
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-3xl font-black text-slate-800 tracking-tight" id="dashTitle">Kontrol Paneli
@@ -343,43 +295,122 @@
                         </div>
                     </div>
 
-                    <!-- TEACHER SPECIFIC DASHBOARD CONTENT -->
+                    <!-- TEACHER DASHBOARD -->
                     <div id="teacherDashboardContent" class="hidden-panel space-y-6">
-                        <!-- Stats Row -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div
-                                class="glass-card p-6 flex items-center gap-4 bg-white/50 border-l-4 border-l-losev-orange">
-                                <div
-                                    class="w-14 h-14 rounded-full bg-losev-orangeSoft text-losev-orange flex items-center justify-center">
-                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                        <!-- Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="glass-card p-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-losev-orangeSoft text-losev-orange flex items-center justify-center">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase">Bekleyen</p>
+                                        <p class="text-xl font-black text-slate-800" id="tcPendingCount">-</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Bekleyen
-                                        Onay</p>
-                                    <h3 class="text-3xl font-black text-slate-800 leading-none" id="tcPendingCount">-
-                                    </h3>
+                            </div>
+                            <div class="glass-card p-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-losev-greenSoft text-losev-green flex items-center justify-center">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase">Etkinlikler</p>
+                                        <p class="text-xl font-black text-slate-800" id="tcEventCount">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-card p-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-losev-blueSoft text-losev-blue flex items-center justify-center">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase">Öğrenciler</p>
+                                        <p class="text-xl font-black text-slate-800" id="tcStudentCount">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-card p-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase">Toplam Saat</p>
+                                        <p class="text-xl font-black text-losev-blue" id="tcTotalHours">-</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pending Approvals Table -->
+                        <!-- Create Event Form -->
+                        <div class="glass-card p-6 md:p-8 bg-white/60">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                <div class="w-2 h-6 rounded-full bg-losev-red"></div>Yeni Etkinlik Oluştur
+                            </h3>
+                            <form id="eventForm" onsubmit="event.preventDefault(); createEvent();">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="input-group"><label>Başlık <span
+                                                class="required-star">*</span></label><input type="text" id="eventTitle"
+                                            required class="form-input" placeholder="Etkinlik başlığı" /></div>
+                                    <div class="input-group"><label>Tarih <span
+                                                class="required-star">*</span></label><input type="date" id="eventDate"
+                                            required class="form-input" /></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="input-group"><label>Tür <span class="required-star">*</span></label>
+                                        <select id="eventType" class="form-input">
+                                            <option value="Seminer">Seminer</option>
+                                            <option value="Stant">Stant / Tanıtım</option>
+                                            <option value="Bağış">Bağış Toplama</option>
+                                            <option value="Kermes">Kermes</option>
+                                            <option value="Kamuoyu bilinçlendirme">Kamuoyu Bilinçlendirme</option>
+                                            <option value="Farkındalık etkinliği">Farkındalık Etkinliği</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group"><label>Süre (Saat) <span
+                                                class="required-star">*</span></label><input type="number" step="0.5"
+                                            min="0.5" id="eventHours" required class="form-input"
+                                            placeholder="Örn: 3" /></div>
+                                </div>
+                                <div class="input-group"><label>Konum</label><input type="text" id="eventLocation"
+                                        class="form-input" placeholder="Etkinlik yeri" /></div>
+                                <div class="input-group"><label>Açıklama</label><textarea id="eventDescription" rows="2"
+                                        class="form-input resize-none" placeholder="Etkinlik detayları..."></textarea>
+                                </div>
+                                <div class="flex justify-center mt-4"><button type="submit" id="createEventBtn"
+                                        class="btn-primary">Etkinlik Oluştur</button></div>
+                            </form>
+                        </div>
+
+                        <!-- Pending Approvals -->
                         <div class="glass-card bg-white p-0 overflow-hidden">
                             <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                                    <div class="w-2 h-6 rounded-full bg-losev-blue"></div>
-                                    Onay Bekleyen Etkinlikler
+                                    <div class="w-2 h-6 rounded-full bg-losev-blue"></div>Yoklama - Onay Bekleyen
+                                    Katılımlar
                                 </h3>
-                                <button onclick="loadPendingActivities()"
+                                <button onclick="loadPendingRegistrations()"
                                     class="text-losev-blue text-sm font-bold hover:underline flex items-center gap-1">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
                                         </path>
-                                    </svg>
-                                    Yenile
+                                    </svg>Yenile
                                 </button>
                             </div>
                             <div class="overflow-x-auto">
@@ -387,7 +418,7 @@
                                     <thead class="bg-slate-50/50">
                                         <tr class="text-[0.65rem] uppercase tracking-wider text-slate-500">
                                             <th class="py-3 px-6 font-bold">Öğrenci & Okul</th>
-                                            <th class="py-3 px-6 font-bold">Etkinlik Detayı</th>
+                                            <th class="py-3 px-6 font-bold">Etkinlik</th>
                                             <th class="py-3 px-6 font-bold text-center">Süre</th>
                                             <th class="py-3 px-6 font-bold text-center">Tarih</th>
                                             <th class="py-3 px-6 font-bold text-right">İşlem</th>
@@ -403,83 +434,56 @@
                                 </table>
                             </div>
                         </div>
+
+                        <!-- Pending Student Approvals -->
+                        <div class="glass-card bg-white p-0 overflow-hidden">
+                            <div class="p-6 border-b border-slate-100">
+                                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                    <div class="w-2 h-6 rounded-full bg-losev-orange"></div>Onay Bekleyen Öğrenci
+                                    Kayıtları
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse">
+                                    <thead class="bg-slate-50/50">
+                                        <tr class="text-[0.65rem] uppercase tracking-wider text-slate-500">
+                                            <th class="py-3 px-6 font-bold">Ad Soyad</th>
+                                            <th class="py-3 px-6 font-bold">Okul</th>
+                                            <th class="py-3 px-6 font-bold">E-posta</th>
+                                            <th class="py-3 px-6 font-bold text-right">İşlem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingStudentsTbody" class="divide-y divide-slate-100">
+                                        <tr>
+                                            <td colspan="4" class="py-8 text-center text-sm text-slate-400">
+                                                Yükleniyor...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- STUDENT SPECIFIC DASHBOARD CONTENT -->
+                    <!-- STUDENT DASHBOARD -->
                     <div id="studentDashboardContent" class="hidden-panel space-y-6">
-
-                        <!-- Top Widget Row -->
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-
-                            <!-- Submit New Activity Form -->
+                            <!-- Available Events -->
                             <div class="md:col-span-7 glass-card p-6 md:p-8 bg-white/60">
                                 <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                                    <div class="w-2 h-6 rounded-full bg-losev-red"></div>
-                                    Yeni Etkinlik Ekle
+                                    <div class="w-2 h-6 rounded-full bg-losev-red"></div>Etkinlikler
                                 </h3>
-                                <form id="activityForm" onsubmit="event.preventDefault(); addActivity();" enctype="multipart/form-data">
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div class="input-group">
-                                            <label>Tarih <span class="required-star">*</span></label>
-                                            <input type="date" id="activityDate" required class="form-input" />
-                                        </div>
-                                        <div class="input-group">
-                                            <label>Süre (Saat) <span class="required-star">*</span></label>
-                                            <input type="number" step="0.5" min="0.5" id="activityHours" required
-                                                class="form-input" placeholder="Örn: 2" />
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label>Etkinlik Türü <span class="required-star">*</span></label>
-                                        <select id="activityType" class="form-input pr-10">
-                                            <option value="Seminer">Seminer</option>
-                                            <option value="Stant">Stant / Tanıtım</option>
-                                            <option value="Bağış">Bağış Toplama</option>
-                                            <option value="Kermes">Kermes Organizasyonu</option>
-                                            <option value="Kamuoyu bilinçlendirme">Kamuoyu Bilinçlendirme</option>
-                                            <option value="Sosyal medya çalışması">Sosyal Medya Çalışması</option>
-                                            <option value="Farkındalık etkinliği">Farkındalık Etkinliği</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <label>Açıklama <span class="required-star">*</span></label>
-                                        <textarea id="activityDescription" rows="3" required
-                                            class="form-input resize-none"
-                                            placeholder="Bugün neler başardığını anlat..."></textarea>
-                                    </div>
-                                    <!-- Dosya Yükleme Alanı -->
-                                    <div class="input-group">
-                                        <label>Fotoğraf / Belge Yükle</label>
-                                        <div class="file-upload-area border-2 border-dashed border-slate-300 rounded-xl p-4 text-center hover:border-losev-red hover:bg-losev-redSoft/10 transition-all cursor-pointer" onclick="document.getElementById('activityFiles').click()">
-                                            <input type="file" id="activityFiles" multiple accept="image/jpeg,image/png,image/gif,application/pdf,.doc,.docx" class="hidden" onchange="handleFileSelection(this)" />
-                                            <svg class="w-8 h-8 mx-auto text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                            </svg>
-                                            <p class="text-sm text-slate-600 font-medium">Dosyaları sürükleyin veya tıklayın</p>
-                                            <p class="text-xs text-slate-400 mt-1">JPEG, PNG, PDF, DOC (max 10MB, max 5 dosya)</p>
-                                        </div>
-                                        <div id="selectedFiles" class="mt-3 space-y-2 hidden">
-                                            <p class="text-sm font-semibold text-slate-700">Seçilen Dosyalar:</p>
-                                            <div id="fileList" class="space-y-2"></div>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-center mt-6">
-                                        <button type="submit" id="addActivityBtn" class="btn-primary">Etkinliği
-                                            Gönder</button>
-                                    </div>
-                                </form>
+                                <div id="eventsContainer" class="space-y-4">
+                                    <p class="text-sm text-slate-400 text-center py-8">Yükleniyor...</p>
+                                </div>
                             </div>
-
                             <!-- Summary Widget -->
-                            <div class="md:col-span-5 glass-card p-6 md:p-8 bg-gradient-to-br border-none shadow-xl border border-white/40"
+                            <div class="md:col-span-5 glass-card p-6 md:p-8 bg-gradient-to-br border-none shadow-xl"
                                 id="badgeCardHero"
                                 style="background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%)">
                                 <h3 class="text-sm font-bold text-slate-600 mb-6 flex items-center justify-between">
-                                    Başarı Tablosu
-                                    <span
+                                    Başarı Tablosu <span
                                         class="px-2 py-0.5 rounded bg-white shadow-sm text-[0.6rem] uppercase font-black text-rose-500">Canlı</span>
                                 </h3>
-
                                 <div id="summaryBox"
                                     class="flex flex-col items-center justify-center min-h-[200px] text-center">
                                     <div
@@ -489,12 +493,11 @@
                             </div>
                         </div>
 
-                        <!-- Activity List -->
+                        <!-- Student Participations -->
                         <div class="glass-card bg-white p-0 overflow-hidden">
                             <div class="p-6 border-b border-slate-100">
                                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                                    <div class="w-2 h-6 rounded-full bg-losev-green"></div>
-                                    Geçmiş Etkinliklerim
+                                    <div class="w-2 h-6 rounded-full bg-losev-green"></div>Katılımlarım
                                 </h3>
                             </div>
                             <div class="overflow-x-auto">
@@ -502,7 +505,7 @@
                                     <thead class="bg-slate-50/50">
                                         <tr class="text-[0.65rem] uppercase tracking-wider text-slate-500">
                                             <th class="py-3 px-6 font-bold">Tarih</th>
-                                            <th class="py-3 px-6 font-bold">Etkinlik Bilgisi</th>
+                                            <th class="py-3 px-6 font-bold">Etkinlik</th>
                                             <th class="py-3 px-6 font-bold text-center">Süre</th>
                                             <th class="py-3 px-6 font-bold text-center">Durum</th>
                                         </tr>
@@ -517,7 +520,29 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </section>
 
+                <!-- ANNOUNCEMENTS VIEW -->
+                <section id="viewAnnouncements" class="animate-fade-in hidden-panel space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-800 tracking-tight">📢 Duyuru Panosu</h2>
+                        <p class="text-slate-500 font-medium mt-1">Sistem duyuruları ve bilgilendirmeler.</p>
+                    </div>
+                    <!-- Teacher: Create Announcement -->
+                    <div id="announcementFormContainer" class="hidden glass-card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Yeni Duyuru Yayınla</h3>
+                        <form onsubmit="event.preventDefault(); createAnnouncement();">
+                            <div class="input-group"><label>Başlık <span class="required-star">*</span></label><input
+                                    type="text" id="announcementTitle" required class="form-input"
+                                    placeholder="Duyuru başlığı" /></div>
+                            <div class="input-group"><label>İçerik</label><textarea id="announcementContent" rows="3"
+                                    class="form-input resize-none" placeholder="Duyuru içeriği..."></textarea></div>
+                            <button type="submit" class="btn-primary mt-2">Duyuru Yayınla</button>
+                        </form>
+                    </div>
+                    <div id="announcementsList" class="space-y-4">
+                        <p class="text-sm text-slate-400 text-center py-8">Yükleniyor...</p>
                     </div>
                 </section>
 
@@ -527,21 +552,17 @@
                         <h2 class="text-3xl font-black text-slate-800 tracking-tight">Merkez Raporları</h2>
                         <p class="text-slate-500 font-medium mt-1">İyiliğin rakamlara yansıyan gücü.</p>
                     </div>
-
                     <div class="grid lg:grid-cols-2 gap-8">
                         <div class="glass-card bg-white p-6 md:p-8">
-                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                <span class="text-2xl">⭐</span> Lider İnciler
-                            </h3>
+                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><span
+                                    class="text-2xl">⭐</span> Lider İnciler</h3>
                             <div class="space-y-4" id="topStudentsContainer">
                                 <p class="text-sm text-slate-400 text-center py-8">Yükleniyor...</p>
                             </div>
                         </div>
-
                         <div class="glass-card bg-white p-6 md:p-8">
-                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                <span class="text-2xl">🏫</span> İnci Okullar
-                            </h3>
+                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><span
+                                    class="text-2xl">🏫</span> İnci Okullar</h3>
                             <div class="space-y-4" id="topSchoolsContainer">
                                 <p class="text-sm text-slate-400 text-center py-8">Yükleniyor...</p>
                             </div>
@@ -556,7 +577,6 @@
     <script>
         const API_BASE = '/api';
 
-        // Setup initial UI
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('sbUserName').innerText = `${user.firstName} ${user.lastName}`;
             document.getElementById('sbInitials').innerText = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
@@ -566,26 +586,26 @@
                 document.getElementById('dashTitle').innerText = 'Öğrenci İstasyonu';
                 document.getElementById('dashSubtitle').innerText = `Hoş geldin ${user.firstName}!`;
                 document.getElementById('studentDashboardContent').classList.remove('hidden-panel');
-
                 renderNav([
                     { id: 'dashboard', label: 'Ana Panel', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+                    { id: 'announcements', label: 'Duyurular', icon: 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z' },
                     { id: 'reports', label: 'Raporlar', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' }
                 ]);
-
                 fetchStudentDashboard();
             } else {
                 document.getElementById('sbUserRole').innerText = 'Koordinatör Öğretmen';
                 document.getElementById('dashTitle').innerText = 'Öğretmen Paneli';
-                document.getElementById('dashSubtitle').innerText = `Okulunuza ait bekleyen onayları yönetin.`;
+                document.getElementById('dashSubtitle').innerText = `Etkinliklerinizi yönetin ve yoklama onaylarını verin.`;
                 document.getElementById('teacherDashboardContent').classList.remove('hidden-panel');
-
+                document.getElementById('announcementFormContainer').classList.remove('hidden');
                 renderNav([
-                    { id: 'dashboard', label: 'Onay Bekleyenler', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+                    { id: 'dashboard', label: 'Yönetim Paneli', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+                    { id: 'announcements', label: 'Duyurular', icon: 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z' },
                     { id: 'reports', label: 'Genel Raporlar', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' }
                 ]);
-
-                loadPendingActivities();
+                loadTeacherDashboard();
             }
+            loadAnnouncements();
             loadReports();
             switchSection('dashboard');
         });
@@ -593,340 +613,287 @@
         function renderNav(items) {
             const dtNav = document.getElementById('sidebarNav');
             const mbNav = document.getElementById('mobileNav');
-
-            let dtHtml = '';
-            let mbHtml = '';
-
+            let dtHtml = '', mbHtml = '';
             items.forEach(item => {
-                dtHtml += `
-                    <button onclick="switchSection('${item.id}')" id="nav_${item.id}" class="nav-item nav-inactive group">
-                        <svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${item.icon}"></path>
-                        </svg>
-                        ${item.label}
-                    </button>
-                `;
-                mbHtml += `
-                    <button onclick="switchSection('${item.id}')" id="mobnav_${item.id}" class="px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500">
-                        ${item.label}
-                    </button>
-                `;
+                dtHtml += `<button onclick="switchSection('${item.id}')" id="nav_${item.id}" class="nav-item nav-inactive group"><svg class="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${item.icon}"></path></svg>${item.label}</button>`;
+                mbHtml += `<button onclick="switchSection('${item.id}')" id="mobnav_${item.id}" class="px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500">${item.label}</button>`;
             });
-
             dtNav.innerHTML = dtHtml;
             mbNav.innerHTML = mbHtml;
         }
 
         function switchSection(sectionId) {
-            document.querySelectorAll('.hidden-panel').forEach(p => p.classList.add('hidden-panel'));
+            document.querySelectorAll('[id^="view"]').forEach(p => { if (p.id.startsWith('view')) p.classList.add('hidden-panel'); });
             const showSec = document.getElementById(`view${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
             if (showSec) showSec.classList.remove('hidden-panel');
-
-            // Reset navs
             document.querySelectorAll('[id^="nav_"]').forEach(n => { n.classList.remove('nav-active'); n.classList.add('nav-inactive'); });
             document.querySelectorAll('[id^="mobnav_"]').forEach(n => { n.classList.remove('bg-losev-red', 'text-white'); n.classList.add('bg-slate-100', 'text-slate-500'); });
-
-            // Set active
             const activeDt = document.getElementById(`nav_${sectionId}`);
             if (activeDt) { activeDt.classList.remove('nav-inactive'); activeDt.classList.add('nav-active'); }
-
             const activeMb = document.getElementById(`mobnav_${sectionId}`);
             if (activeMb) { activeMb.classList.remove('bg-slate-100', 'text-slate-500'); activeMb.classList.add('bg-losev-red', 'text-white'); }
         }
 
-        function logout() {
-            localStorage.removeItem('auth_user');
-            window.location.href = 'index.html';
-        }
+        function logout() { localStorage.removeItem('auth_user'); window.location.href = 'index.html'; }
 
         function showToast(msg, type = 'success') {
             const toast = document.createElement('div');
             toast.className = `fixed bottom-4 right-4 px-6 py-4 rounded-xl shadow-xl font-bold text-sm transform transition-all translate-y-20 opacity-0 z-50 ${type === 'error' ? 'bg-losev-red text-white' : 'bg-losev-green text-white'}`;
-            toast.innerText = msg;
-            document.body.appendChild(toast);
+            toast.innerText = msg; document.body.appendChild(toast);
             requestAnimationFrame(() => toast.classList.remove('translate-y-20', 'opacity-0'));
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
         async function apiRequest(endpoint, method = 'GET', body = null) {
-            try {
-                const opts = { method, headers: {} };
-                if (body) {
-                    opts.headers['Content-Type'] = 'application/json';
-                    opts.body = JSON.stringify(body);
-                }
-                const res = await fetch(API_BASE + endpoint, opts);
-                const data = await res.json().catch(() => ({}));
-                if (!res.ok) throw new Error(data.error || 'Bilinmeyen bir hata oluştu');
-                return data;
-            } catch (err) {
-                throw err;
-            }
+            const opts = { method, headers: {} };
+            if (body) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+            const res = await fetch(API_BASE + endpoint, opts);
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || 'Bilinmeyen bir hata oluştu');
+            return data;
         }
 
         // --- STUDENT ---
         async function fetchStudentDashboard() {
             try {
-                const [studentData, activitiesData] = await Promise.all([
+                const [studentData, registrations, allEvents] = await Promise.all([
                     apiRequest(`/students/${user.id}`),
-                    apiRequest(`/students/${user.id}/activities`)
+                    apiRequest(`/events/student/${user.id}/registrations`),
+                    apiRequest('/events')
                 ]);
 
-                // Summary Badge
                 const { summary, badge } = studentData;
-                let bgClass = 'bg-white';
-                let txtClass = 'text-losev-red';
-                let labelBg = 'bg-slate-100 text-slate-700';
-
+                let bgClass = 'bg-white', txtClass = 'text-losev-red', labelBg = 'bg-slate-100 text-slate-700';
                 if (badge.code === 'bronz') { bgClass = 'bg-gradient-to-br from-white to-amber-50 border-amber-200'; txtClass = 'text-amber-600'; labelBg = 'bg-gradient-to-r from-amber-500 to-yellow-400 text-white shadow-md shadow-amber-500/30'; }
                 else if (badge.code === 'gumus') { bgClass = 'bg-gradient-to-br from-white to-slate-100 border-slate-300'; txtClass = 'text-slate-700'; labelBg = 'bg-slate-300 text-slate-800 shadow-md'; }
                 else if (badge.code === 'altin') { bgClass = 'bg-gradient-to-br from-white to-yellow-50 border-yellow-300'; txtClass = 'text-yellow-600'; labelBg = 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-lg shadow-yellow-500/40'; }
                 else if (badge.code === 'platin') { bgClass = 'bg-gradient-to-br from-white to-cyan-50 border-cyan-200'; txtClass = 'text-cyan-600'; labelBg = 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg shadow-cyan-500/40'; }
 
-                const cardStyle = document.getElementById('badgeCardHero');
-                cardStyle.className = `md:col-span-5 glass-card p-6 md:p-8 border shadow-xl ${bgClass}`;
-
+                document.getElementById('badgeCardHero').className = `md:col-span-5 glass-card p-6 md:p-8 border shadow-xl ${bgClass}`;
                 document.getElementById('summaryBox').innerHTML = `
-                    <div class="flex items-center justify-center mb-6">
-                        <div class="px-6 py-2 rounded-full ${labelBg} font-black text-sm uppercase tracking-widest shadow-sm">
-                            ${badge.label}
-                        </div>
-                    </div>
+                    <div class="flex items-center justify-center mb-6"><div class="px-6 py-2 rounded-full ${labelBg} font-black text-sm uppercase tracking-widest shadow-sm">${badge.label}</div></div>
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <div class="bg-white/60 p-4 rounded-2xl flex flex-col justify-center border border-white/50 backdrop-blur-sm shadow-sm">
-                            <span class="text-[0.65rem] uppercase tracking-wider text-slate-500 font-bold mb-1">Puan/G. Saat</span>
-                            <span class="text-3xl font-black ${txtClass}">${summary.total}</span>
-                        </div>
-                        <div class="bg-white/60 p-4 rounded-2xl flex flex-col justify-center border border-white/50 backdrop-blur-sm shadow-sm">
-                            <span class="text-[0.65rem] uppercase tracking-wider text-slate-500 font-bold mb-1">Yıllık Etkin</span>
-                            <span class="text-3xl font-black text-slate-700">${summary.yearly}</span>
-                        </div>
-                    </div>
-                `;
+                        <div class="bg-white/60 p-4 rounded-2xl flex flex-col justify-center border border-white/50 backdrop-blur-sm shadow-sm"><span class="text-[0.65rem] uppercase tracking-wider text-slate-500 font-bold mb-1">G. Saat</span><span class="text-3xl font-black ${txtClass}">${summary.total}</span></div>
+                        <div class="bg-white/60 p-4 rounded-2xl flex flex-col justify-center border border-white/50 backdrop-blur-sm shadow-sm"><span class="text-[0.65rem] uppercase tracking-wider text-slate-500 font-bold mb-1">Hedef</span><span class="text-3xl font-black text-slate-700">30</span></div>
+                    </div>`;
 
-                // Activities Tab
-                const tbody = document.getElementById('studentActivitiesTbody');
-                if (activitiesData.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="py-12 text-center text-sm font-medium text-slate-400">Henüz kayıtlı etkinliğin yok. İlk adımı atamaya ne dersin?</td></tr>`;
+                // Events list
+                const regEventIds = new Set(registrations.map(r => r.eventId));
+                const container = document.getElementById('eventsContainer');
+                if (allEvents.length === 0) {
+                    container.innerHTML = '<p class="text-sm text-slate-400 text-center py-8">Henüz etkinlik bulunmuyor.</p>';
                 } else {
-                    activitiesData.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    tbody.innerHTML = activitiesData.map(a => {
-                        const statusLabel = a.status === 'approved' ? 'Onaylandı' : a.status === 'rejected' ? 'Reddedildi' : 'Bekliyor';
-                        const statusClass = `status-${a.status}`;
-                        return `
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="py-4 px-6 font-bold text-sm text-slate-700 whitespace-nowrap">${new Date(a.date).toLocaleDateString('tr-TR')}</td>
-                            <td class="py-4 px-6 text-sm">
-                                <p class="font-bold text-slate-800">${a.type}</p>
-                                <p class="text-slate-500 mt-1 line-clamp-2 leading-snug">${a.description || '-'}</p>
-                            </td>
-                            <td class="py-4 px-6 text-sm font-black text-losev-blue text-center">${a.hours} sa</td>
-                            <td class="py-4 px-6 text-center"><span class="status-badge ${statusClass}">${statusLabel}</span></td>
-                        </tr>
-                        `;
+                    container.innerHTML = allEvents.map(ev => {
+                        const isRegistered = regEventIds.has(ev.id);
+                        const isPast = new Date(ev.date) < new Date();
+                        const dateStr = new Date(ev.date).toLocaleDateString('tr-TR');
+                        return `<div class="p-4 rounded-2xl border ${isPast ? 'bg-slate-50 border-slate-200' : 'bg-white border-losev-red/20 hover:shadow-md'} transition">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="text-xs font-bold uppercase tracking-wider ${isPast ? 'text-slate-400' : 'text-losev-red'}">${ev.type}</span>
+                                        ${isPast ? '<span class="text-[0.6rem] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full font-bold">GEÇMİŞ</span>' : '<span class="text-[0.6rem] bg-losev-greenSoft text-losev-green px-2 py-0.5 rounded-full font-bold">YAKLAŞAN</span>'}
+                                    </div>
+                                    <p class="font-bold text-slate-800">${ev.title}</p>
+                                    <p class="text-xs text-slate-500 mt-1">${dateStr} • ${ev.hours} saat • ${ev.location || '-'}</p>
+                                </div>
+                                ${isRegistered
+                                ? '<span class="text-xs font-bold text-losev-green bg-losev-greenSoft px-3 py-1.5 rounded-full">✓ Kayıtlı</span>'
+                                : (!isPast ? `<button onclick="joinEvent('${ev.id}')" class="btn-primary text-xs py-2 px-4">Katıl</button>` : '')
+                            }
+                            </div>
+                        </div>`;
                     }).join('');
                 }
-            } catch (e) {
-                showToast(e.message, 'error');
-            }
-        }
 
-        async function addActivity() {
-            const btn = document.getElementById('addActivityBtn');
-            btn.disabled = true;
-            btn.innerText = "Gönderiliyor...";
-
-            const payload = {
-                date: document.getElementById('activityDate').value,
-                type: document.getElementById('activityType').value,
-                hours: document.getElementById('activityHours').value,
-                description: document.getElementById('activityDescription').value.trim(),
-            };
-
-            try {
-                // Önce etkinliği oluştur
-                const activity = await apiRequest(`/students/${user.id}/activities`, 'POST', payload);
-
-                // Dosya yükleme varsa yap
-                const fileInput = document.getElementById('activityFiles');
-                if (fileInput.files && fileInput.files.length > 0 && activity.id) {
-                    const formData = new FormData();
-                    for (let i = 0; i < fileInput.files.length; i++) {
-                        formData.append('files', fileInput.files[i]);
-                    }
-
-                    try {
-                        await fetch(`${API_BASE}/activities/${activity.id}/files`, {
-                            method: 'POST',
-                            body: formData
-                        });
-                    } catch (fileErr) {
-                        console.log('Dosya yükleme hatası:', fileErr);
-                    }
+                // Registrations table
+                const tbody = document.getElementById('studentActivitiesTbody');
+                if (registrations.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-sm font-medium text-slate-400">Henüz bir etkinliğe katılmadın.</td></tr>';
+                } else {
+                    tbody.innerHTML = registrations.map(r => {
+                        const statusLabel = r.status === 'approved' ? 'Onaylandı' : r.status === 'rejected' ? 'Reddedildi' : 'Bekliyor';
+                        return `<tr class="hover:bg-slate-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-sm text-slate-700 whitespace-nowrap">${new Date(r.date).toLocaleDateString('tr-TR')}</td>
+                            <td class="py-4 px-6 text-sm"><p class="font-bold text-slate-800">${r.title}</p><p class="text-slate-500 mt-1 text-xs">${r.type}</p></td>
+                            <td class="py-4 px-6 text-sm font-black text-losev-blue text-center">${r.hours} sa</td>
+                            <td class="py-4 px-6 text-center"><span class="status-badge status-${r.status}">${statusLabel}</span></td>
+                        </tr>`;
+                    }).join('');
                 }
-
-                showToast('Etkinlik başarıyla oluşturuldu! Onay sürecinde.');
-                document.getElementById('activityForm').reset();
-                clearFileSelection();
-                await fetchStudentDashboard();
-            } catch (e) {
-                showToast(e.message, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Etkinliği Gönder";
-            }
+            } catch (e) { showToast(e.message, 'error'); }
         }
 
-        // Dosya seçimi yönetimi
-        let selectedFilesArray = [];
-
-        function handleFileSelection(input) {
-            selectedFilesArray = Array.from(input.files);
-            updateFileList();
-        }
-
-        function updateFileList() {
-            const container = document.getElementById('selectedFiles');
-            const list = document.getElementById('fileList');
-
-            if (selectedFilesArray.length === 0) {
-                container.classList.add('hidden');
-                return;
-            }
-
-            container.classList.remove('hidden');
-            list.innerHTML = selectedFilesArray.map((file, index) => `
-                <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-lg">
-                    <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <span class="text-sm text-slate-700 truncate max-w-[200px]">${file.name}</span>
-                        <span class="text-xs text-slate-400">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-                    </div>
-                    <button type="button" onclick="removeFile(${index})" class="text-slate-400 hover:text-losev-red">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function removeFile(index) {
-            selectedFilesArray.splice(index, 1);
-
-            // FileList immutable olduğu için yeni bir DataTransfer oluştur
-            const dataTransfer = new DataTransfer();
-            selectedFilesArray.forEach(file => dataTransfer.items.add(file));
-            document.getElementById('activityFiles').files = dataTransfer.files;
-
-            updateFileList();
-        }
-
-        function clearFileSelection() {
-            selectedFilesArray = [];
-            document.getElementById('activityFiles').value = '';
-            updateFileList();
+        async function joinEvent(eventId) {
+            try {
+                await apiRequest(`/events/${eventId}/register`, 'POST', { studentId: user.id });
+                showToast('Etkinliğe başarıyla kaydoldun! Onay bekleniyor.');
+                fetchStudentDashboard();
+            } catch (e) { showToast(e.message, 'error'); }
         }
 
         // --- TEACHER ---
-        async function loadPendingActivities() {
+        async function loadTeacherDashboard() {
+            try {
+                const [pending, events, stats] = await Promise.all([
+                    apiRequest('/events/pending-registrations?schoolName=' + encodeURIComponent(user.schoolName || '')),
+                    apiRequest('/events'),
+                    apiRequest('/reports/overview')
+                ]);
+
+                document.getElementById('tcPendingCount').innerText = pending.length;
+                document.getElementById('tcEventCount').innerText = events.length;
+                document.getElementById('tcStudentCount').innerText = stats.totalStudents;
+                document.getElementById('tcTotalHours').innerText = stats.totalVolunteerHours;
+
+                loadPendingRegistrations();
+                loadPendingStudentApprovals();
+            } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        async function createEvent() {
+            const btn = document.getElementById('createEventBtn');
+            btn.disabled = true; btn.innerText = 'Oluşturuluyor...';
+            try {
+                await apiRequest('/events', 'POST', {
+                    title: document.getElementById('eventTitle').value,
+                    date: document.getElementById('eventDate').value,
+                    type: document.getElementById('eventType').value,
+                    hours: document.getElementById('eventHours').value,
+                    location: document.getElementById('eventLocation').value,
+                    description: document.getElementById('eventDescription').value,
+                    createdBy: user.id,
+                    createdByRole: 'teacher'
+                });
+                showToast('Etkinlik başarıyla oluşturuldu!');
+                document.getElementById('eventForm').reset();
+                loadTeacherDashboard();
+            } catch (e) { showToast(e.message, 'error'); }
+            finally { btn.disabled = false; btn.innerText = 'Etkinlik Oluştur'; }
+        }
+
+        async function loadPendingRegistrations() {
             try {
                 const tbody = document.getElementById('pendingTbody');
-                tbody.innerHTML = `<tr><td colspan="5" class="py-12 text-center text-sm font-medium text-slate-400">Aranıyor...</td></tr>`;
+                const allPending = await apiRequest('/events/pending-registrations?schoolName=' + encodeURIComponent(user.schoolName || ''));
+                document.getElementById('tcPendingCount').innerText = allPending.length;
 
-                const allPending = await apiRequest('/activities/pending');
-                const list = allPending.filter(a => a.schoolName === user.schoolName);
-
-                document.getElementById('tcPendingCount').innerText = list.length;
-
-                if (list.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" class="py-12 text-center text-sm font-bold text-slate-400">Okulunuza ait bekleyen kayıt bulunmuyor. ✅</td></tr>`;
+                if (allPending.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="py-12 text-center text-sm font-bold text-slate-400">Bekleyen kayıt yok. ✅</td></tr>';
                     return;
                 }
 
-                tbody.innerHTML = list.map(a => `
+                tbody.innerHTML = allPending.map(r => `
                     <tr class="hover:bg-slate-50 transition-colors group">
-                        <td class="py-4 px-6">
-                            <p class="font-black text-sm text-slate-800">${a.studentName || 'Bilinmiyor'}</p>
-                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mt-1">${a.schoolName}</p>
-                        </td>
-                        <td class="py-4 px-6">
-                            <span class="inline-flex bg-slate-100 text-slate-700 px-2 py-1 rounded text-[0.65rem] font-bold uppercase tracking-wider mb-2">${a.type}</span>
-                            <p class="text-sm text-slate-600 line-clamp-2 leading-relaxed">${a.description || '-'}</p>
-                        </td>
-                        <td class="py-4 px-6 text-lg font-black text-losev-orange text-center">${a.hours}</td>
-                        <td class="py-4 px-6 text-sm text-slate-500 font-bold text-center">${new Date(a.date).toLocaleDateString('tr-TR')}</td>
-                        <td class="py-4 px-6 text-right w-32">
-                            <div class="flex justify-end gap-2">
-                                <button onclick="updateActivity('${a.id}', 'approved')" class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition shadow-sm border border-emerald-100" title="Onayla">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                </button>
-                                <button onclick="updateActivity('${a.id}', 'rejected')" class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center hover:bg-rose-500 hover:text-white transition shadow-sm border border-rose-100" title="Reddet">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (e) {
-                showToast(e.message, 'error');
-            }
+                        <td class="py-4 px-6"><p class="font-black text-sm text-slate-800">${r.studentFirstName} ${r.studentLastName}</p><p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mt-1">${r.schoolName}</p></td>
+                        <td class="py-4 px-6"><span class="inline-flex bg-slate-100 text-slate-700 px-2 py-1 rounded text-[0.65rem] font-bold uppercase tracking-wider mb-1">${r.eventType}</span><p class="text-sm text-slate-600">${r.eventTitle}</p></td>
+                        <td class="py-4 px-6 text-lg font-black text-losev-orange text-center">${r.eventHours}</td>
+                        <td class="py-4 px-6 text-sm text-slate-500 font-bold text-center">${new Date(r.eventDate).toLocaleDateString('tr-TR')}</td>
+                        <td class="py-4 px-6 text-right w-32"><div class="flex justify-end gap-2">
+                            <button onclick="approveRegistration('${r.id}')" class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition shadow-sm border border-emerald-100" title="Onayla"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></button>
+                            <button onclick="rejectRegistration('${r.id}')" class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center hover:bg-rose-500 hover:text-white transition shadow-sm border border-rose-100" title="Reddet"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                        </div></td>
+                    </tr>`).join('');
+            } catch (e) { showToast(e.message, 'error'); }
         }
 
-        async function updateActivity(id, status) {
-            if (!confirm(status === 'approved' ? 'Bu etkinliği onaylıyor musunuz?' : 'Bu etkinliği reddetmek istediğinize emin misiniz?')) return;
+        async function approveRegistration(id) {
+            if (!confirm('Bu katılımı onaylıyor musunuz?')) return;
             try {
-                await apiRequest(`/activities/${id}/status`, 'PATCH', { status });
-                showToast(status === 'approved' ? 'Etkinlik onayı verildi.' : 'Etkinlik reddedildi.', status === 'approved' ? 'success' : 'error');
-                await loadPendingActivities();
-                loadReports();
-            } catch (e) {
-                showToast(e.message, 'error');
-            }
+                await apiRequest(`/events/registrations/${id}/status`, 'PATCH', { status: 'approved', approvedBy: user.id, approvedByRole: user.role });
+                showToast('Katılım onaylandı.');
+                loadPendingRegistrations();
+            } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        async function rejectRegistration(id) {
+            if (!confirm('Bu katılımı reddetmek istediğinize emin misiniz?')) return;
+            try {
+                await apiRequest(`/events/registrations/${id}/status`, 'PATCH', { status: 'rejected', approvedBy: user.id, approvedByRole: user.role });
+                showToast('Katılım reddedildi.', 'error');
+                loadPendingRegistrations();
+            } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        async function loadPendingStudentApprovals() {
+            try {
+                const pending = await apiRequest('/headoffice/pending-students');
+                const tbody = document.getElementById('pendingStudentsTbody');
+                if (pending.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="py-8 text-center text-sm text-slate-400">Onay bekleyen öğrenci yok. ✅</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = pending.map(s => `
+                    <tr class="hover:bg-slate-50"><td class="py-3 px-6 font-bold text-sm">${s.firstName} ${s.lastName}</td><td class="py-3 px-6 text-sm text-slate-500">${s.schoolName || '-'}</td><td class="py-3 px-6 text-sm text-slate-500">${s.email}</td>
+                    <td class="py-3 px-6 text-right"><div class="flex justify-end gap-2">
+                        <button onclick="approveStudentReg('${s.id}')" class="px-3 py-1.5 rounded-lg bg-losev-greenSoft text-losev-green text-xs font-bold hover:bg-losev-green hover:text-white transition">Onayla</button>
+                        <button onclick="rejectStudentReg('${s.id}')" class="px-3 py-1.5 rounded-lg bg-losev-redSoft text-losev-red text-xs font-bold hover:bg-losev-red hover:text-white transition">Reddet</button>
+                    </div></td></tr>`).join('');
+            } catch (e) { console.error(e); }
+        }
+
+        async function approveStudentReg(id) {
+            await apiRequest(`/headoffice/students/${id}/approve`, 'PATCH');
+            showToast('Öğrenci onaylandı.'); loadPendingStudentApprovals();
+        }
+        async function rejectStudentReg(id) {
+            await apiRequest(`/headoffice/students/${id}/reject`, 'PATCH');
+            showToast('Öğrenci reddedildi.', 'error'); loadPendingStudentApprovals();
+        }
+
+        // --- ANNOUNCEMENTS ---
+        async function loadAnnouncements() {
+            try {
+                const announcements = await apiRequest('/announcements');
+                const container = document.getElementById('announcementsList');
+                if (announcements.length === 0) {
+                    container.innerHTML = '<p class="text-sm text-slate-400 text-center py-8">Henüz duyuru yok.</p>';
+                    return;
+                }
+                container.innerHTML = announcements.map(a => `
+                    <div class="glass-card p-6 hover:shadow-md transition">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-losev-red">${a.createdByRole === 'admin' ? '🏛️ Yönetim' : '👩‍🏫 Öğretmen'}</span>
+                            <span class="text-xs text-slate-400">${new Date(a.createdAt).toLocaleDateString('tr-TR')}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">${a.title}</h4>
+                        <p class="text-slate-600 mt-2 text-sm leading-relaxed">${a.content || ''}</p>
+                    </div>`).join('');
+            } catch (e) { console.error(e); }
+        }
+
+        async function createAnnouncement() {
+            try {
+                await apiRequest('/announcements', 'POST', {
+                    title: document.getElementById('announcementTitle').value,
+                    content: document.getElementById('announcementContent').value,
+                    createdBy: user.id,
+                    createdByRole: user.role
+                });
+                showToast('Duyuru yayınlandı!');
+                document.getElementById('announcementTitle').value = '';
+                document.getElementById('announcementContent').value = '';
+                loadAnnouncements();
+            } catch (e) { showToast(e.message, 'error'); }
         }
 
         // --- REPORTS ---
         async function loadReports() {
             try {
-                const [students, schools] = await Promise.all([
-                    apiRequest('/reports/top-students'),
-                    apiRequest('/reports/top-schools')
-                ]);
-
+                const [students, schools] = await Promise.all([apiRequest('/reports/top-students'), apiRequest('/reports/top-schools')]);
                 const formatRow = (index, name, detail, val, suffix) => `
                     <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 hover:bg-white transition border border-slate-100 hover:shadow-md hover:border-slate-200 group">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl ${index === 0 ? 'bg-gradient-to-br from-amber-400 to-yellow-500 text-white shadow-lg shadow-yellow-500/30' : index === 1 ? 'bg-slate-300 text-slate-600' : index === 2 ? 'bg-amber-700 text-white' : 'bg-white text-slate-400 border border-slate-200'} flex items-center justify-center font-black text-sm">
-                                ${index < 3 ? '🏆' : `#${index + 1}`}
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-bold text-sm text-slate-800">${name}</span>
-                                <span class="text-[0.65rem] uppercase font-bold tracking-wider text-slate-500 mt-0.5">${detail}</span>
-                            </div>
+                            <div class="w-10 h-10 rounded-xl ${index === 0 ? 'bg-gradient-to-br from-amber-400 to-yellow-500 text-white shadow-lg shadow-yellow-500/30' : index === 1 ? 'bg-slate-300 text-slate-600' : index === 2 ? 'bg-amber-700 text-white' : 'bg-white text-slate-400 border border-slate-200'} flex items-center justify-center font-black text-sm">${index < 3 ? '🏆' : `#${index + 1}`}</div>
+                            <div class="flex flex-col"><span class="font-bold text-sm text-slate-800">${name}</span><span class="text-[0.65rem] uppercase font-bold tracking-wider text-slate-500 mt-0.5">${detail}</span></div>
                         </div>
-                        <div class="flex flex-col items-end">
-                            <span class="font-black text-lg text-losev-blue">${val}</span>
-                            <span class="text-[0.6rem] uppercase tracking-widest font-bold text-slate-400">${suffix}</span>
-                        </div>
-                    </div>
-                `;
-
+                        <div class="flex flex-col items-end"><span class="font-black text-lg text-losev-blue">${val}</span><span class="text-[0.6rem] uppercase tracking-widest font-bold text-slate-400">${suffix}</span></div>
+                    </div>`;
                 const stContainer = document.getElementById('topStudentsContainer');
-                if (students.length === 0) stContainer.innerHTML = '<p class="text-sm text-slate-400 text-center py-4">Henüz veri yok</p>';
-                else stContainer.innerHTML = students.map((s, i) => formatRow(i, s.name, s.schoolName || 'Bilinmiyor', s.totalHours, 'Saat')).join('');
-
+                stContainer.innerHTML = students.length === 0 ? '<p class="text-sm text-slate-400 text-center py-4">Henüz veri yok</p>' : students.map((s, i) => formatRow(i, s.name, s.schoolName || 'Bilinmiyor', s.totalHours, 'Saat')).join('');
                 const scContainer = document.getElementById('topSchoolsContainer');
-                if (schools.length === 0) scContainer.innerHTML = '<p class="text-sm text-slate-400 text-center py-4">Henüz veri yok</p>';
-                else scContainer.innerHTML = schools.map((s, i) => formatRow(i, s.schoolName || 'Bilinmeyen Okul', `${s.studentCount} Etkin Öğrenci`, s.totalHours, 'Saat')).join('');
-
-            } catch (e) {
-                console.error('Rapor hatası:', e);
-            }
+                scContainer.innerHTML = schools.length === 0 ? '<p class="text-sm text-slate-400 text-center py-4">Henüz veri yok</p>' : schools.map((s, i) => formatRow(i, s.schoolName || 'Bilinmeyen', `${s.studentCount} Öğrenci`, s.totalHours, 'Saat')).join('');
+            } catch (e) { console.error('Rapor hatası:', e); }
         }
     </script>
 </body>

@@ -4,7 +4,7 @@
     "password": "admin123",
     "firstName": "Test",
     "lastName": "Admin",
-    "schoolName": "Test Okulu"
+    "schoolName": "İstanbul Lisesi"
   },
   "headoffice": {
     "email": "gm@losev.org",
@@ -19,14 +19,28 @@
       "password": "admin123",
       "firstName": "Test",
       "lastName": "Admin",
-      "schoolName": "Test Okulu"
+      "schoolName": "İstanbul Lisesi"
     },
     {
-      "email": "koordinator@losev.org",
+      "email": "ayse.teacher@losev.org",
       "password": "losev2024",
-      "firstName": "Ali",
-      "lastName": "Veli",
-      "schoolName": "LÖSEV Koordinasyon"
+      "firstName": "Ayşe",
+      "lastName": "Kaya",
+      "schoolName": "Ankara Fen Lisesi"
+    },
+    {
+      "email": "mehmet.teacher@losev.org",
+      "password": "losev2024",
+      "firstName": "Mehmet",
+      "lastName": "Şahin",
+      "schoolName": "İzmir Anadolu Lisesi"
+    },
+    {
+      "email": "zeynep.teacher@losev.org",
+      "password": "losev2024",
+      "firstName": "Zeynep",
+      "lastName": "Demir",
+      "schoolName": "Bursa Güzel Sanatlar Lisesi"
     }
   ],
   "students": [
@@ -42,7 +56,9 @@
       "grade": "11",
       "phone": "05551234567",
       "coordinatorTeacherName": "Test Admin",
-      "targetHours": 40
+      "targetHours": 40,
+      "badge": "Platin İnci Lideri",
+      "totalHours": 245
     },
     {
       "firstName": "Ayşe",
@@ -55,8 +71,10 @@
       "district": "Çankaya",
       "grade": "10",
       "phone": "05559876543",
-      "coordinatorTeacherName": "Test Admin",
-      "targetHours": 40
+      "coordinatorTeacherName": "Ayşe Kaya",
+      "targetHours": 40,
+      "badge": "Altın İnci",
+      "totalHours": 128
     },
     {
       "firstName": "Mehmet",
@@ -69,9 +87,226 @@
       "district": "Konak",
       "grade": "12",
       "phone": "05554567890",
-      "coordinatorTeacherName": "Ali Veli",
-      "targetHours": 40
+      "coordinatorTeacherName": "Mehmet Şahin",
+      "targetHours": 40,
+      "badge": "Gümüş İnci",
+      "totalHours": 67
+    },
+    {
+      "firstName": "Zeynep",
+      "lastName": "Şahin",
+      "email": "zeynep@test.com",
+      "password": "123456",
+      "nationalId": "56789012345",
+      "schoolName": "Bursa Güzel Sanatlar Lisesi",
+      "city": "Bursa",
+      "district": "Osmangazi",
+      "grade": "11",
+      "phone": "05555678901",
+      "coordinatorTeacherName": "Zeynep Demir",
+      "targetHours": 40,
+      "badge": "Bronz İnci",
+      "totalHours": 32
+    },
+    {
+      "firstName": "Can",
+      "lastName": "Özdemir",
+      "email": "can@test.com",
+      "password": "123456",
+      "nationalId": "67890123456",
+      "schoolName": "Antalya Lisesi",
+      "city": "Antalya",
+      "district": "Muratpaşa",
+      "grade": "10",
+      "phone": "05556789012",
+      "coordinatorTeacherName": "Test Admin",
+      "targetHours": 40,
+      "badge": "Altın İnci",
+      "totalHours": 156
+    },
+    {
+      "firstName": "Elif",
+      "lastName": "Çelik",
+      "email": "elif@test.com",
+      "password": "123456",
+      "nationalId": "78901234567",
+      "schoolName": "Adana Fen Lisesi",
+      "city": "Adana",
+      "district": "Seyhan",
+      "grade": "11",
+      "phone": "05557890123",
+      "coordinatorTeacherName": "Ayşe Kaya",
+      "targetHours": 40,
+      "badge": "Platin İnci Lideri",
+      "totalHours": 312
+    },
+    {
+      "firstName": "Burak",
+      "lastName": "Aydın",
+      "email": "burak@test.com",
+      "password": "123456",
+      "nationalId": "89012345678",
+      "schoolName": "Konya Anadolu Lisesi",
+      "city": "Konya",
+      "district": "Meram",
+      "grade": "12",
+      "phone": "05558901234",
+      "coordinatorTeacherName": "Mehmet Şahin",
+      "targetHours": 40,
+      "badge": "Gümüş İnci",
+      "totalHours": 58
+    },
+    {
+      "firstName": "Selin",
+      "lastName": "Kurt",
+      "email": "selin@test.com",
+      "password": "123456",
+      "nationalId": "90123456789",
+      "schoolName": "Eskişehir Lisesi",
+      "city": "Eskişehir",
+      "district": "Tepebaşı",
+      "grade": "10",
+      "phone": "05559012345",
+      "coordinatorTeacherName": "Zeynep Demir",
+      "targetHours": 40,
+      "badge": "Bronz İnci",
+      "totalHours": 28
+    },
+    {
+      "firstName": "Emre",
+      "lastName": "Arslan",
+      "email": "emre@test.com",
+      "password": "123456",
+      "nationalId": "01234567890",
+      "schoolName": "Samsun Lisesi",
+      "city": "Samsun",
+      "district": "Atakum",
+      "grade": "11",
+      "phone": "05550123456",
+      "coordinatorTeacherName": "Test Admin",
+      "targetHours": 40,
+      "badge": "Altın İnci",
+      "totalHours": 142
+    },
+    {
+      "firstName": "Deniz",
+      "lastName": "Kara",
+      "email": "deniz@test.com",
+      "password": "123456",
+      "nationalId": "11223344556",
+      "schoolName": "Trabzon Lisesi",
+      "city": "Trabzon",
+      "district": "Ortahisar",
+      "grade": "12",
+      "phone": "05551234567",
+      "coordinatorTeacherName": "Ayşe Kaya",
+      "targetHours": 40,
+      "badge": "Gümüş İnci",
+      "totalHours": 75
+    },
+    {
+      "firstName": "Ceren",
+      "lastName": "Yıldız",
+      "email": "ceren@test.com",
+      "password": "123456",
+      "nationalId": "22334455667",
+      "schoolName": "Gaziantep Lisesi",
+      "city": "Gaziantep",
+      "district": "Şahinbey",
+      "grade": "10",
+      "phone": "05552345678",
+      "coordinatorTeacherName": "Mehmet Şahin",
+      "targetHours": 40,
+      "badge": "Bronz İnci",
+      "totalHours": 35
+    },
+    {
+      "firstName": "Oğuz",
+      "lastName": "Bulut",
+      "email": "oguz@test.com",
+      "password": "123456",
+      "nationalId": "33445566778",
+      "schoolName": "Mersin Lisesi",
+      "city": "Mersin",
+      "district": "Yenişehir",
+      "grade": "11",
+      "phone": "05553456789",
+      "coordinatorTeacherName": "Zeynep Demir",
+      "targetHours": 40,
+      "badge": "Altın İnci",
+      "totalHours": 118
     }
+  ],
+  "schoolBadges": [
+    {
+      "schoolName": "İstanbul Lisesi",
+      "badge": "Yılın En Aktif İnci Okulu",
+      "totalStudents": 156,
+      "totalHours": 4230,
+      "rank": 1
+    },
+    {
+      "schoolName": "Ankara Fen Lisesi",
+      "badge": "Sosyal Etki Lideri Okul",
+      "totalStudents": 142,
+      "totalHours": 3890,
+      "rank": 2
+    },
+    {
+      "schoolName": "İzmir Anadolu Lisesi",
+      "badge": "İnci Dostu Okul",
+      "totalStudents": 98,
+      "totalHours": 2450,
+      "rank": 3
+    },
+    {
+      "schoolName": "Adana Fen Lisesi",
+      "badge": "İnci Dostu Okul",
+      "totalStudents": 87,
+      "totalHours": 2150,
+      "rank": 4
+    },
+    {
+      "schoolName": "Bursa Güzel Sanatlar Lisesi",
+      "badge": "İnci Dostu Okul",
+      "totalStudents": 65,
+      "totalHours": 1680,
+      "rank": 5
+    }
+  ],
+  "cityStats": [
+    { "city": "İstanbul", "students": 245, "totalHours": 6780, "schools": 12 },
+    { "city": "Ankara", "students": 189, "totalHours": 5230, "schools": 8 },
+    { "city": "İzmir", "students": 156, "totalHours": 4120, "schools": 7 },
+    { "city": "Adana", "students": 134, "totalHours": 3450, "schools": 5 },
+    { "city": "Bursa", "students": 98, "totalHours": 2890, "schools": 4 },
+    { "city": "Antalya", "students": 87, "totalHours": 2340, "schools": 4 },
+    { "city": "Konya", "students": 76, "totalHours": 1980, "schools": 3 },
+    { "city": "Gaziantep", "students": 65, "totalHours": 1670, "schools": 3 },
+    { "city": "Mersin", "students": 54, "totalHours": 1420, "schools": 2 },
+    { "city": "Trabzon", "students": 43, "totalHours": 1180, "schools": 2 },
+    { "city": "Samsun", "students": 38, "totalHours": 980, "schools": 2 },
+    { "city": "Eskişehir", "students": 32, "totalHours": 840, "schools": 1 }
+  ],
+  "activityTypes": [
+    { "type": "Sağlık & Farkındalık", "count": 1245, "hours": 4560 },
+    { "type": "Okul Projeleri", "count": 890, "hours": 3450 },
+    { "type": "Toplumsal Destek", "count": 678, "hours": 2890 },
+    { "type": "Doğa & Çevre", "count": 456, "hours": 1820 },
+    { "type": "Bağış Organizasyonu", "count": 234, "hours": 980 },
+    { "type": "Sosyal Medya", "count": 189, "hours": 650 }
+  ],
+  "monthlyStats": [
+    { "month": "Ocak", "activities": 234, "hours": 890 },
+    { "month": "Şubat", "activities": 198, "hours": 760 },
+    { "month": "Mart", "activities": 267, "hours": 1020 },
+    { "month": "Nisan", "activities": 289, "hours": 1150 },
+    { "month": "Mayıs", "activities": 312, "hours": 1280 },
+    { "month": "Haziran", "activities": 198, "hours": 780 },
+    { "month": "Eylül", "activities": 245, "hours": 950 },
+    { "month": "Ekim", "activities": 278, "hours": 1080 },
+    { "month": "Kasım", "activities": 301, "hours": 1190 },
+    { "month": "Aralık", "activities": 189, "hours": 720 }
   ],
   "login_urls": {
     "student": "http://localhost:4000/login.html",

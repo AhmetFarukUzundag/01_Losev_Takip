@@ -3,6 +3,57 @@
 Bu doküman, LÖSEV tarafından paylaşılan örnek slayt içeriği temel alınarak hazırlanmış bir referans metindir.
 Etkinlikte bu projeyi seçen ekipler, bu çerçeve üzerinden ilerleyebilir.
 
+---
+
+## 🚀 Hızlı Başlangıç & Seed Data Rehberi
+
+### Sistemi Çalıştırma
+
+```bash
+cd backend && npm install && npm start
+```
+
+Sunucu `http://localhost:4000` adresinde başlar. İlk çalıştırmada seed veriler otomatik yüklenir.
+
+### Test Hesapları (Seed Data)
+
+| Rol | E-posta | Şifre | Açıklama |
+|-----|---------|-------|----------|
+| **Yönetici (Admin)** | `admin@losev.org` | `admin123` | Genel Merkez paneline erişir (`/headoffice.html`) |
+| **Öğretmen** | `ogretmen@losev.org` | `ogretmen123` | Koordinatör öğretmen paneli (`/dashboard.html`) |
+| **Öğrenci 1** | `ahmet@test.com` | `123456` | Öğrenci paneli (`/dashboard.html`) |
+| **Öğrenci 2** | `elif@test.com` | `123456` | Öğrenci paneli |
+| **Öğrenci 3** | `can@test.com` | `123456` | Öğrenci paneli |
+
+### Seed Data İçeriği
+
+- **1 Yönetici**: Genel Merkez Admin
+- **1 Öğretmen**: Onaylı koordinatör öğretmen
+- **3 Öğrenci**: Onaylı, Ankara İnci Lisesi
+- **2 Geçmiş Etkinlik**: Seminer (15 Şubat), Kermes (10 Mart) — katılımlar onaylı
+- **1 Yaklaşan Etkinlik**: Kamuoyu Bilinçlendirme (20 Nisan) — 2 öğrenci beklemede
+- **1 Duyuru**: Gönüllülük programı başlangıç duyurusu
+
+### Seed Verinin Konumu
+
+Seed verileri `backend/src/data.js` dosyasındaki `seedTestData()` fonksiyonunda tanımlıdır. Veritabanı dosyası (`backend/database.sqlite`) silindiğinde bir sonraki başlatmada veriler yeniden oluşturulur.
+
+### Rol Bazlı Yetki Akışı
+
+```
+Kayıt Onay Zinciri:
+  Öğrenci kayıt → Öğretmen VEYA Admin onayı
+  Öğretmen kayıt → YALNIZCA Admin onayı
+
+Etkinlik Akışı:
+  Admin/Öğretmen → Etkinlik Oluşturur
+  Öğrenci → Etkinliğe Katılım Başvurusu
+  Öğretmen/Admin → Yoklama Onayı (katılım teyidi)
+  Onaylanan saatler → Gönüllülük saatine eklenir
+```
+
+---
+
 ## Proje Özeti
 
 LÖSEV İnci öğrencilerinin sosyal sorumluluk çalışmalarını kayıt altına alan, doğrulayan ve raporlayan bir takip sistemi fikridir.

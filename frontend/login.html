@@ -277,9 +277,13 @@
 
                 <!-- Role Switcher -->
                 <div class="flex items-center gap-2 mb-6 p-2 bg-slate-100 rounded-xl">
-                    <button onclick="switchRole('student')" id="roleStudentBtn" class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition bg-white text-losev-red shadow-sm">Öğrenci</button>
-                    <button onclick="switchRole('teacher')" id="roleTeacherBtn" class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-800">Öğretmen</button>
-                    <button onclick="switchRole('headoffice')" id="roleHeadOfficeBtn" class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-800">Genel Merkez</button>
+                    <button onclick="switchRole('student')" id="roleStudentBtn"
+                        class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition bg-white text-losev-red shadow-sm">Öğrenci</button>
+                    <button onclick="switchRole('teacher')" id="roleTeacherBtn"
+                        class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-800">Öğretmen</button>
+                    <button onclick="switchRole('headoffice')" id="roleHeadOfficeBtn"
+                        class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition text-slate-600 hover:text-slate-800">Genel
+                        Merkez</button>
                 </div>
 
                 <!-- FORMS -->
@@ -397,8 +401,8 @@
             document.getElementById('roleIcon').innerHTML = isTeacher
                 ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>'
                 : isHeadOffice
-                ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>'
-                : '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>';
+                    ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>'
+                    : '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>';
 
             // Left panel text
             const leftTitle = document.getElementById('leftTitle');
@@ -407,15 +411,15 @@
                 leftTitle.innerHTML = isTeacher
                     ? 'Koordinatör<br/><span class="text-losev-orangeSoft">Öğretmen Paneli</span>'
                     : isHeadOffice
-                    ? 'Genel Merkez<br/><span class="text-losev-orangeSoft">Yönetim Paneli</span>'
-                    : 'Bir İnci<br/><span class="text-losev-orangeSoft">Bin Umut!</span>';
+                        ? 'Genel Merkez<br/><span class="text-losev-orangeSoft">Yönetim Paneli</span>'
+                        : 'Bir İnci<br/><span class="text-losev-orangeSoft">Bin Umut!</span>';
             }
             if (leftDesc) {
                 leftDesc.innerText = isTeacher
                     ? 'Öğrencilerinizin gönüllülük çalışmalarını takip edin, onaylayın ve raporlarını görüntüleyin.'
                     : isHeadOffice
-                    ? 'Tüm öğrenci ve okul verilerini yönetin, raporlar oluşturun ve istatistikleri görüntüleyin.'
-                    : 'LÖSEV İnci Gönüllülük İstasyonuna katılarak, çocuklara umut olan kocaman ailenin bir parçası olabilirsin.';
+                        ? 'Tüm öğrenci ve okul verilerini yönetin, raporlar oluşturun ve istatistikleri görüntüleyin.'
+                        : 'LÖSEV İnci Gönüllülük İstasyonuna katılarak, çocuklara umut olan kocaman ailenin bir parçası olabilirsin.';
             }
 
             // Genel Merkez için kayıt butonunu gizle
@@ -516,7 +520,7 @@
                     response = await apiRequest('/auth/login', 'POST', { role: currentRole, email, password });
                 }
                 localStorage.setItem('auth_user', JSON.stringify({ ...response.user, role: response.role }));
-                
+
                 // Role göre yönlendirme
                 if (response.role === 'headoffice') {
                     window.location.href = 'headoffice.html';
@@ -551,8 +555,17 @@
 
             try {
                 const response = await apiRequest('/auth/register', 'POST', payload);
-                localStorage.setItem('auth_user', JSON.stringify({ ...response.user, role: response.role }));
-                window.location.href = 'dashboard.html';
+                // Kayıt onay bekliyor - giriş yapılmaz
+                const approvalMsg = currentRole === 'teacher'
+                    ? '✅ Kaydınız alındı! Hesabınız yönetici onayından sonra aktifleşecektir.'
+                    : '✅ Kaydınız alındı! Hesabınız öğretmen veya yönetici onayından sonra aktifleşecektir.';
+                document.getElementById('formContainer').innerHTML = `
+                    <div class="rounded-xl bg-losev-greenSoft border border-green-200 p-6 text-center">
+                        <div class="text-4xl mb-4">🎉</div>
+                        <h3 class="text-xl font-bold text-losev-green mb-2">Kayıt Başarılı!</h3>
+                        <p class="text-sm text-slate-700 leading-relaxed">${approvalMsg}</p>
+                        <button onclick="window.location.href='login.html'" class="mt-6 px-6 py-3 bg-losev-green text-white rounded-full font-bold hover:bg-green-700 transition">Giriş Sayfasına Dön</button>
+                    </div>`;
             } catch (err) {
                 showError(err.message);
             } finally {
